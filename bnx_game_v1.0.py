@@ -136,7 +136,7 @@ def enter_demon_king(_token, _uid):
 
 def bnx_run():
     global j
-    for i in range(0, 5):  # (0,5) 中的 5 根据自己地址数量修改
+    for i in range(0, 5):  # (0,5) 中的 5 根据自己账号数量修改
         _account = Account().create()
         # TODO 登录
         token, uid = login(_account.key.hex())
