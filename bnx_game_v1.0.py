@@ -136,7 +136,7 @@ def enter_demon_king(_token, _uid):
 
 def bnx_run():
     global j
-    for i in range(0, 5):  # (0,10) 中的 10 根据自己需要的循环次数修改
+    for i in range(0, 5):  # (0,5) 中的 5 根据自己地址数量修改
         _account = Account().create()
         # TODO 登录
         token, uid = login(_account.key.hex())
@@ -158,6 +158,6 @@ def auto_attack(text="默认值"):
 if __name__ == '__main__':
     sched = BlockingScheduler()
     # 2023-2-28 12:00:00 每隔30分钟执行一次
-    sched.add_job(auto_attack, 'interval', start_date=datetime.datetime(2022, 2, 28, 12, 0, 0), minutes=30,
+    sched.add_job(auto_attack, 'interval', start_date=datetime.datetime(2023, 2, 28, 12, 0, 0), minutes=30,
                   args=['循环完成'])
     sched.start()
