@@ -68,11 +68,11 @@ def login(private_key):
     :param private_key: 私钥
     :return:
     """
-    for i in range(0,50):
-        key = [0xe5f8e01ba8e74a5da6ce017ed94d50fbd65d5d1b1937b2818aaf1d881cd5ff82,  #just test
+    for i in range(0,3):  #(0,3) 中的 3 根据自己号数量修改，比如 20 个号就改成 20
+        private_key = [0xe5f8e01ba8e74a5da6ce017ed94d50fbd65d5d1b1937b2818aaf1d881cd5ff82,  #just test,no money
                 0x3fb4c2c2ff545c27300886e7a32d6a8920c38a8f8d21ab8a02361c1ab8834305,
                 0xe224bef742e25a89d8ba21a5686e88fdc8ae99ad74b1d5c44a76d737740144a7]
-        account = Account.from_key(key[i])
+        account = Account.from_key(private_key[i])
         msg = 'You are better than you know!'
         signature = Account.sign_message(encode_defunct(text=msg), account.key.hex()).signature.hex()
         uk = get_uk(account.address.lower())
@@ -132,7 +132,7 @@ def enter_demon_king(_token, _uid):
 def bnx_run():
     global k
     k = k + 1
-    for i in range(0,3):
+    for i in range(0,3):  #(0,3) 中的 3 根据自己号数量修改，比如 20 个号就改成 20
         j = str(i + 1)
         _account = Account().create()
         logger.debug(_account.address)
@@ -144,6 +144,7 @@ def bnx_run():
         # TODO 查询数据
         enter_demon_king(token, uid)
         print("第"+j+"个号")
+        # time.sleep(random.randint(1,2))  # 随机时间函数，如果出现连接报错可以尝试开启，(1,2)意思为随机延迟 1-2 秒，可自行修改
     print("第" + str(k) + "次循环")
 
 if __name__ == '__main__':
