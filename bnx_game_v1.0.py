@@ -3,20 +3,22 @@
 # @Software :PyCharm
 import base64
 import hashlib
-import time
-import schedule
 import random
+import time
+import datetime
 import requests
-from local_fake_useragent import UserAgent
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
+from apscheduler.schedulers.blocking import BlockingScheduler
 from eth_account import Account
 from eth_account.messages import encode_defunct
+from local_fake_useragent import UserAgent
 from loguru import logger
 
 s = 'O&FPGp+on=vX.V@Nc17dsat85TWwgSzfyZLIuq4AYJK6r2kmC3lhbBR9HiEeUDj0MxQ'
 j = 0
 k = 0
+
 
 def get_uk(account_address):
     _o = account_address[2:]
@@ -69,12 +71,12 @@ def login(private_key):
     :param private_key: 私钥
     :return:
     """
-    key = ['0xe5f8e01ba8e74a5da6ce017ed94d50fbd65d5d1b1937b2818aaf1d881cd5ff82',  #just test,no money
-            '0xd8ea7e91b9fc8d998f1dfd8665d655941a8ab8efe84fbde695fff934e4b381cf',
-            '0xa197f86b4efcd834fde56e309827f10c76dc5a4853db3827f195d7bc001a498e',
-            '0xad4d57ae5078218c3a1bd86776ac67675116f5eeb898777fa699d6cdaf85f6f9',
-            '0x20280ffc0767d4be12683f53c7eae687f2dca5d9b566cf40ecc6fd2c65b0cfb5']
-    account = Account.from_key(key[j])
+    private_key = ['0x7f74ac56f229bf580fd603e92105f920899e1d72bc60fb571fde450dfcfae4c3',  # just test,no money
+                   '0x4ebeaccc0a66a77a229473c0f2dc2dc56368da466987f4412479abf3e6829e53',
+                   '0x36d92398c73ac12b70fe9564bcbf1e260845d0db56bffff04cce900fef9b2f01',
+                   '0x42054a6f4b4e0a778044fe95298be8e146265797c421688c7c68b663c0cfa841',
+                   '0x4e6497671c7050e01e717cfd4bb198b1867897fa276ab742800e0a97a66e688e']
+    account = Account.from_key(private_key[j])
     msg = 'You are better than you know!'
     signature = Account.sign_message(encode_defunct(text=msg), account.key.hex()).signature.hex()
     uk = get_uk(account.address.lower())
@@ -131,13 +133,11 @@ def enter_demon_king(_token, _uid):
                             headers=headers).json()
     logger.debug(response)
 
+
 def bnx_run():
-    global k,j
-    k = k + 1
-    for i in range(0,5):  #(0,10) 中的 10 根据自己需要的循环次数修改
+    global j
+    for i in range(0, 5):  # (0,10) 中的 10 根据自己需要的循环次数修改
         _account = Account().create()
-        logger.debug(_account.address)
-        logger.debug(_account.key.hex())
         # TODO 登录
         token, uid = login(_account.key.hex())
         j = i + 1
@@ -145,14 +145,19 @@ def bnx_run():
         attack(token, uid)
         # TODO 查询数据
         enter_demon_king(token, uid)
-        print("第"+str(j)+"个号")
-        time.sleep(random.randint(1,3))  # 随机时间函数，如果出现连接报错可以尝试开启，(1,3)意思为随机延迟 1-3 秒，可自行修改
+        print("第" + str(j) + "个号")
+        # time.sleep(random.randint(1, 3))  # 随机时间函数，如果出现连接报错可以尝试开启，(1,3)意思为随机延迟 1-3 秒，可自行修改
     j = 0
 
-    print("第" + str(k) + "次循环")
+
+def auto_attack(text="默认值"):
+    bnx_run()
+    print(text, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+
 
 if __name__ == '__main__':
-    bnx_run()
-    schedule.every(30).minutes.do(bnx_run)
-    while True:
-        schedule.run_pending()
+    sched = BlockingScheduler()
+    # 2023-2-28 12:00:00 每隔30分钟执行一次
+    sched.add_job(auto_attack, 'interval', start_date=datetime.datetime(2022, 2, 28, 12, 0, 0), minutes=30,
+                  args=['循环完成'])
+    sched.start()
