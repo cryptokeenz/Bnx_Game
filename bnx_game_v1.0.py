@@ -146,7 +146,7 @@ def bnx_run():
         # TODO 查询数据
         enter_demon_king(token, uid)
         print("第" + str(j) + "个号")
-        # time.sleep(random.randint(1, 3))  # 随机时间函数，如果出现连接报错可以尝试开启，(1,3)意思为随机延迟 1-3 秒，可自行修改
+        # time.sleep(random.randint(1, 3))  # 随机时间函数，如果出现连接报错可以去掉「#」开启该功能，(1,3)意思为随机延迟 1-3 秒
     j = 0
 
 
