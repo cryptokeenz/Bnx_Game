@@ -148,6 +148,6 @@ def bnx_run():
 
 if __name__ == '__main__':
     bnx_run()
-    schedule.every(10).seconds.do(bnx_run)
+    schedule.every(30).minutes.do(bnx_run)
     while True:
         schedule.run_pending()
