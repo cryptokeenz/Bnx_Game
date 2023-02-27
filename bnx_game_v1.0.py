@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# @File     :bnx.py
+# @File     :bnx_game_v1.0.py
 # @Software :PyCharm
 import base64
 import hashlib
