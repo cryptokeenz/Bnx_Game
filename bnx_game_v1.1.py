@@ -123,7 +123,7 @@ def attack(_token, _uid, _consume=200):
     headers = {
         'Accept': '*/*', 'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7', 'Cache-Control': 'no-cache',
         'Connection': 'keep-alive', 'Pragma': 'no-cache',
-        'Referer': f'https://raid.binaryx.pro/{cv}/web-desktop/index.html',
+        'Referer': f'https://raid.binaryx.pro/{cv}/web-desktop/index.html?c=7frw4rtw',
         'User-Agent': str(u),
         'language': 'en', 'token': _token}
     key, _tk = get_key()
@@ -140,7 +140,7 @@ def enter_demon_king(_token, _uid):
     headers = {
         'Accept': '*/*', 'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7', 'Cache-Control': 'no-cache',
         'Connection': 'keep-alive', 'Pragma': 'no-cache',
-        'Referer': f'https://raid.binaryx.pro/{cv}/web-desktop/index.html',
+        'Referer': f'https://raid.binaryx.pro/{cv}/web-desktop/index.html?c=7frw4rtw',
         'User-Agent': str(u),
         'language': 'en', 'token': _token}
     params = {key: value, '_tk': _tk, '_cv': str(cv), '_uid': _uid}
