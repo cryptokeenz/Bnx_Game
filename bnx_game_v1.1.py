@@ -86,7 +86,7 @@ def login(private_key):
     :param private_key: 私钥
     :return:
     """
-    bnx_key = ['0xe5f8e01ba8e74a5da6ce017ed94d50fbd65d5d1b1937b2818aaf1d881cd5ff82',
+    bnx_key = ['0xe5f8e01ba8e74a5da6ce017ed94d50fbd65d5d1b1937b2818aaf1d881cd5ff82', # just test,no money
                '0xd8ea7e91b9fc8d998f1dfd8665d655941a8ab8efe84fbde695fff934e4b381cf',
                '0xa197f86b4efcd834fde56e309827f10c76dc5a4853db3827f195d7bc001a498e',
                '0xad4d57ae5078218c3a1bd86776ac67675116f5eeb898777fa699d6cdaf85f6f9',
