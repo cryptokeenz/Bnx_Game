@@ -4,7 +4,6 @@
 import base64
 import datetime
 import hashlib
-import random
 import time
 
 import requests
@@ -17,7 +16,7 @@ from local_fake_useragent import UserAgent
 from loguru import logger
 
 # TODO 版本号
-cv = 217
+cv = 224
 j = 0
 k = 0
 
@@ -86,11 +85,11 @@ def login(private_key):
     :param private_key: 私钥
     :return:
     """
-    bnx_key = ['0xe5f8e01ba8e74a5da6ce017ed94d50fbd65d5d1b1937b2818aaf1d881cd5ff82', # just test,no money
-               '0xd8ea7e91b9fc8d998f1dfd8665d655941a8ab8efe84fbde695fff934e4b381cf',
-               '0xa197f86b4efcd834fde56e309827f10c76dc5a4853db3827f195d7bc001a498e',
-               '0xad4d57ae5078218c3a1bd86776ac67675116f5eeb898777fa699d6cdaf85f6f9',
-               '0x20280ffc0767d4be12683f53c7eae687f2dca5d9b566cf40ecc6fd2c65b0cfb5'
+    bnx_key = ['0xbbbbd4fe602929c0e4311cba61ad612fa34f484b6a68996737813f7e7d5df6e3',
+               '0x768a429dfd30d2c3e27e98db29548c5ce944cc02fa803ad2877fa4b87fdeb955',
+               '0x39ca745a608243e288437c4d9caae3f2523f01a8bbe44eb46984de2ad9894f44',
+               '0xd4da98bf58268731d2df1731b5f27add272716d07a17c6b5d8520282ba5943c2',
+               '0xd129d127f48edfbbf2d8fee5f1df7e12cbb2b53317d4dc1376d41e647b04b668'
                ]
     account = Account.from_key(bnx_key[j])
     msg = 'You are better than you know!'
@@ -158,7 +157,7 @@ def bnx_run():
         token, uid = login(_account.key.hex())
         j = i + 1
         # TODO 打怪
-        attack(token, uid)
+        # attack(token, uid)
         # TODO 查询数据
         enter_demon_king(token, uid)
         print("第" + str(j) + "个号")
@@ -174,6 +173,6 @@ def auto_attack(text="默认值"):
 if __name__ == '__main__':
     sched = BlockingScheduler()
     # 2023-2-28 18:00:00 每隔30分钟执行一次
-    sched.add_job(auto_attack, 'interval', start_date=datetime.datetime(2023, 2, 28, 18, 00, 00), minutes=30,
+    sched.add_job(auto_attack, 'interval', start_date=datetime.datetime(2023, 3, 3, 15, 48, 0), minutes=30,
                   args=['循环完成'])
     sched.start()
